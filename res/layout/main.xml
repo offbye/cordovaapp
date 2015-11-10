@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
+    <org.apache.cordova.engine.SystemWebView
+        android:id="@+id/cordovaWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_share"
+        android:id="@+id/btnShare"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="60dp"
+        android:layout_gravity="right|top" />
+
+</FrameLayout>
