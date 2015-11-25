@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffffff">
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:background="#f9f9f9"
+        android:elevation="10dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/bg_toolbar_back_selector"
+            android:padding="10dp"
+            android:src="@drawable/iconfont_back" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btnBack"
+            android:layout_toLeftOf="@+id/btnRefresh"
+            android:text="@string/app_name"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:textColor="#434343"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/btnRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnShare"
+            android:background="@drawable/bg_toolbar_back_selector"
+            android:padding="10dp"
+            android:src="@drawable/iconfont_refresh" />
+
+        <ImageButton
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_toolbar_back_selector"
+            android:padding="10dp"
+            android:src="@drawable/iconfont_share" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b8b8b8"></View>
+
     <org.apache.cordova.engine.SystemWebView
         android:id="@+id/cordovaWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_share"
-        android:id="@+id/btnShare"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="60dp"
-        android:layout_gravity="right|top" />
 
-</FrameLayout>
+</LinearLayout>

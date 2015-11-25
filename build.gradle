@@ -178,7 +178,12 @@ android {
     }
 
     defaultConfig {
-        versionCode cdvVersionCode ?: Integer.parseInt("" + privateHelpers.extractIntFromManifest("versionCode") + "0")
+        applicationId "com.offbye.cordovaapp"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 20
+        versionName "2.0"
+        //versionCode cdvVersionCode ?: Integer.parseInt("" + privateHelpers.extractIntFromManifest("versionCode") + "0")
         if (cdvMinSdkVersion != null) {
             minSdkVersion cdvMinSdkVersion
         }

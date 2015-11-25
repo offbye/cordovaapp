@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 
 import org.apache.cordova.CordovaActivity;
@@ -34,6 +33,7 @@ import org.apache.cordova.engine.SystemWebViewEngine;
 
 public class MainActivity extends CordovaActivity {
 
+    SystemWebView webView;
 
     /**
      * Called when the activity is first created.
@@ -44,14 +44,14 @@ public class MainActivity extends CordovaActivity {
         setContentView(R.layout.main);
         super.init();
         loadUrl(launchUrl);
-        ImageButton btnShare=(ImageButton)findViewById(R.id.btnShare);
+        ImageButton btnShare = (ImageButton) findViewById(R.id.btnShare);
 
-        btnShare.setAlpha(0f);
-        btnShare.animate()
-                .alpha(1f)
-                .setDuration(1500)
-                .setInterpolator(new DecelerateInterpolator())
-                .setStartDelay(1000);
+//        btnShare.setAlpha(0f);
+//        btnShare.animate()
+//                .alpha(1f)
+//                .setDuration(1500)
+//                .setInterpolator(new DecelerateInterpolator())
+//                .setStartDelay(1000);
 
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +59,34 @@ public class MainActivity extends CordovaActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-                intent.putExtra(Intent.EXTRA_TEXT, "欢迎访问千米网 http://m.qianmi.com");
+                intent.putExtra(Intent.EXTRA_TEXT, "欢迎访问" + appView.getUrl());
                 startActivity(Intent.createChooser(intent, "分享到"));
             }
 
+        });
+
+        (findViewById(R.id.btnBack)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (appView.canGoBack()) {
+                    appView.backHistory();
+                } else {
+                    finish();
+                }
+            }
+        });
+
+        (findViewById(R.id.btnRefresh)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appView.loadUrl(appView.getUrl());
+            }
         });
     }
 
     @Override
     protected CordovaWebView makeWebView() {
-        SystemWebView webView = (SystemWebView)findViewById(R.id.cordovaWebView);
+        webView = (SystemWebView) findViewById(R.id.cordovaWebView);
         return new CordovaWebViewImpl(new SystemWebViewEngine(webView));
     }
 
@@ -90,5 +108,20 @@ public class MainActivity extends CordovaActivity {
 
         appView.getView().requestFocusFromTouch();
     }
+
+//    @Override
+//    public Object onMessage(String id, Object data) {
+//        Log.d("onMessage", id + data.toString() + webView.getTitle());
+//        if (id.equals("onPageFinished")) {
+//            String pageTitle = webView.getTitle();
+//            if (TextUtils.isEmpty(pageTitle)) {
+//                ((TextView) findViewById(R.id.tvTitle)).setText(R.string.app_name);
+//            } else {
+//                ((TextView) findViewById(R.id.tvTitle)).setText(webView.getTitle());
+//            }
+//        }
+//        super.onMessage(id, data);
+//        return null;
+//    }
 
 }
